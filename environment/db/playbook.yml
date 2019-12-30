@@ -1,0 +1,32 @@
+
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: import the mongodb public GPG Key
+      shell: wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
+
+    - name: install gnupg and its required libraries
+      shell: sudo apt-get install gnupg
+
+    - name: create a list file for mongodb
+      shell: echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+    - name: reload local package database
+      shell: sudo apt-get update
+
+    - name: install the mongodb packages
+      shell: sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+
+    - name: remove mongod.config
+      shell: sudo rm /etc/mongod.conf
+
+    - name: creating a link
+      shell: sudo ln -s /home/ubuntu/environment/mongod.conf /etc/mongod.conf
+
+    - name: restarting mongod
+      shell: sudo systemctl restart mongod
+
+    - name: automatically enabling mongod
+      shell: sudo systemctl enable mongod

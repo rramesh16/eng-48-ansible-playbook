@@ -1,0 +1,35 @@
+# vim:ft=ansible:
+
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: update the sources list
+      shell: sudo apt-get update -y
+
+    - name: upgrade any packages available
+      shell: sudo apt-get upgrade -y
+
+    - name: install nginx
+      shell: sudo apt-get install nginx -y
+
+    - name: install git
+      shell: sudo apt-get install git -y
+
+    - name: install python properties
+      shell: sudo apt-get install python-software-properties -y
+
+    - name: install nodejs
+      shell: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+    - name: config nodejs
+      shell: sudo apt-get install nodejs -y
+
+    - name: install pm2
+      shell: sudo npm install pm2 -g
+
+
+# cd /home/ubuntu/app
+# npm install
+# npm start

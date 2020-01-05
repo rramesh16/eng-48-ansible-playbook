@@ -16,5 +16,5 @@
       - ```cd app```
       - Once you're in the right path write, ```npm install```
       - ```npm start```
-You should attain the following output: ```Your app is ready and listening on port 3000```
-Now, you should be able to run the app from the url 'development.local:3000'
+- You should attain the following output: ```Your app is ready and listening on port 3000```
+- Now, you should be able to run the app from the url 'development.local:3000'
